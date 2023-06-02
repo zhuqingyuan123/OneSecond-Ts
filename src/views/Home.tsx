@@ -10,6 +10,8 @@ function App() {
   // const [songListType, setSongListType] =
   //   useState < Awaited < typeof setSongListType >> ['data']['sub'];
   // console.log(songListType);
+  const aa = useState(1);
+  console.log(aa);
   useEffect(() => {
     getSongListType()
       .then((res) => {
