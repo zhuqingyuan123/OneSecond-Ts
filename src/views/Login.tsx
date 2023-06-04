@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import loginPng from '@/assets/loginPng.svg';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
