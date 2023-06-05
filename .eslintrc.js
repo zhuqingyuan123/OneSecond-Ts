@@ -25,6 +25,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       }
     ],
+    'no-console': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

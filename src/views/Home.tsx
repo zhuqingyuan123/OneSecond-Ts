@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import React from 'react';
+import {
+  IdcardFilled,
+  DashboardFilled,
+  CreditCardFilled,
+  CarFilled,
+  BankFilled,
+  ContactsFilled,
+  RedEnvelopeFilled,
+  ReconciliationFilled,
+  SettingFilled
+} from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu, Layout } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '@/Icons/svgs/logo.svg';
+import styled from 'styled-components';
+
+const ListSpan = styled.div`
+  .ant-menu-submenu-title {
+    .ant-menu-title-content {
+      font-weight: bold;
+    }
+  }
+  .ant-menu-item {
+    > .ant-menu-title-content {
+      font-weight: bold;
+    }
+  }
+`;
 
 const { Header, Sider, Content } = Layout;
 const layoutStyle: React.CSSProperties = {
@@ -66,40 +90,66 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuItem[] = [
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Option 1', '1'),
-    getItem('Option 2', '2'),
-    getItem('Option 3', '3'),
-    getItem('Option 4', '4')
+const items: MenuProps['items'] = [
+  getItem('数据总览', '/', <DashboardFilled />),
+
+  getItem('用户管理', 'user', <IdcardFilled />, [
+    getItem('代理列表', 'agents'),
+    getItem('管理员列表', 'admins'),
+    getItem('用户列表', 'users')
   ]),
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6')
+
+  // { type: 'divider' },
+
+  getItem('订单管理', 'order', <CreditCardFilled />, [
+    getItem('订单列表', 'orders'),
+    getItem('资金走向列表', 'capitaltrend'),
+    getItem('取消订单配置', 'cancelset'),
+    getItem('小费选项配置', 'feeset')
   ]),
-  getItem('Navigation Three', 'sub4', <SettingOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Option 11', '11'),
-    getItem('Option 12', '12')
+  getItem('骑手管理', 'rider', <CarFilled />, [
+    getItem('骑手列表', 'riders'),
+    getItem('骑手审核列表', 'registers')
+  ]),
+  getItem('城市管理', 'city', <BankFilled />, [getItem('城市运营列表', 'citys')]),
+  getItem('运营管理', 'valuation', <ContactsFilled />, [
+    getItem('计价规则', 'valuations'),
+    getItem('重量标签', 'weight'),
+    getItem('物品标签组', 'tag')
+  ]),
+  getItem('优惠券管理', 'coupon', <RedEnvelopeFilled />, [
+    getItem('优惠券管理', 'coupons'),
+    getItem('优惠券设置', 'couponSettings')
+  ]),
+  getItem('提现管理', 'withdrawal', <ReconciliationFilled />, [
+    getItem('提现列表', 'cash'),
+    getItem('提现设置', 'withdrawalSettings')
+  ]),
+  getItem('系统设置', 'config', <SettingFilled />, [
+    getItem('小程序设置', 'smallapp'),
+    getItem('分享设置', 'share'),
+    getItem('积分设置', 'integral'),
+    getItem('订阅消息设置', 'wxsubscribe'),
+    getItem('用户指南', 'userGuide'),
+    getItem('骑手指南', 'riderGuide'),
+    getItem('骑手协议', 'agreementRider')
   ])
 ];
-
-// submenu keys of first level
-const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-
 export default function Index() {
-  const [openKeys, setOpenKeys] = useState(['sub1']);
-
-  const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-      setOpenKeys(keys);
+  const navigate = useNavigate();
+  const onClick: MenuProps['onClick'] = (e) => {
+    if (e.keyPath.length > 1) {
+      console.log('keyPath ', e);
+      navigate(
+        e.keyPath
+          .reverse()
+          .map((item) => `/${item}`)
+          .join('')
+      );
     } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+      navigate(e.keyPath.join(''));
     }
   };
-
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
@@ -111,13 +161,15 @@ export default function Index() {
       </Header>
       <Layout hasSider>
         <Sider style={siderStyle}>
-          <Menu
-            mode="inline"
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}
-            style={{ width: 256 }}
-            items={items}
-          />
+          <ListSpan>
+            <Menu
+              onClick={onClick}
+              defaultSelectedKeys={['1']}
+              defaultOpenKeys={['sub1']}
+              mode="inline"
+              items={items}
+            />
+          </ListSpan>
         </Sider>
         <Content style={contentStyle}>
           <Outlet />
