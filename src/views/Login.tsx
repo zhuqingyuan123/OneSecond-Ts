@@ -1,11 +1,29 @@
 /* eslint-disable no-console */
 import React from 'react';
-import loginPng from '@/assets/loginPng.svg';
+import loginPng from '@/assets/svgs/loginPng.svg';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
+import styled from 'styled-components';
+
+const FormField = styled.div`
+  margin-top: 40px;
+  .ant-input-affix-wrapper {
+    height: 40px;
+  }
+  .verifyCode {
+    width: 190px;
+  }
+`;
 
 function App() {
-  const onFinish = (values: any) => {
+  interface Ilogin {
+    adminName: string;
+    adminPwd: string;
+    no: string;
+    verifyCode: string;
+  }
+
+  const onFinish = (values: Ilogin) => {
     console.log('Received values of form: ', values);
   };
   return (
@@ -26,20 +44,20 @@ function App() {
           <div className="w-[400px] h-[500px] p-[40px]">
             <div>
               <div className="text-[20px] ml-[8px] text-center">账号密码登录</div>
-              <div className="mt-[40px]">
+              <FormField>
                 <Form
                   name="normal_login"
                   className="login-form"
                   initialValues={{ remember: true }}
                   onFinish={onFinish}
                 >
-                  <Form.Item name="username" rules={[{ required: true, message: '请输入账号!' }]}>
+                  <Form.Item name="adminName" rules={[{ required: true, message: '请输入账号!' }]}>
                     <Input
                       prefix={<UserOutlined className="site-form-item-icon" />}
                       placeholder="管理员账号"
                     />
                   </Form.Item>
-                  <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
+                  <Form.Item name="adminPwd" rules={[{ required: true, message: '请输入密码!' }]}>
                     <Input
                       prefix={<LockOutlined className="site-form-item-icon" />}
                       type="password"
@@ -47,25 +65,37 @@ function App() {
                     />
                   </Form.Item>
                   <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: '请输入正确的验证码!' }]}
+                    name="verifyCode"
+                    rules={[{ required: true, message: '请输入验证码!' }]}
                   >
                     <Input
                       prefix={<LockOutlined className="site-form-item-icon" />}
-                      type="password"
                       placeholder="输入验证码"
+                      className="verifyCode "
                     />
+                    <div className="cursor-pointer">
+                      <img src="" alt="" />
+                    </div>
                   </Form.Item>
-
                   <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="login-form-button w-full mt-[40px] h-[40px]"
+                    >
                       登录
                     </Button>
                   </Form.Item>
                 </Form>
-              </div>
+              </FormField>
             </div>
           </div>
+        </div>
+        <div className="text-[12px] text-[#666666] mt-[40px] text-center">
+          Copyright © 2022 包小盒 All right reserved.
+        </div>
+        <div className="text-[14px] text-[#333333] mt-[8px] text-center">
+          浙ICP备19025175号-4 aaa浙公网安备 33010602011191号
         </div>
       </div>
     </div>
