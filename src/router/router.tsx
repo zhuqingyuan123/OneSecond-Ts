@@ -1,28 +1,43 @@
-import { useRoutes, Navigate } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import React from 'react';
 import Home from '@/views/Home';
 import Login from '@/views/Login';
+import Config from '@/views/Config/Config';
+import Share from '@/views/Config/Share';
+import Integral from '@/views/Config/Integral';
+import NotFind from '@/views/NotFind';
+import DataScreening from '@/views/DataScreening';
 
 export default function RouterConfig() {
   return useRoutes([
-    {
-      path: '/',
-      element: <Navigate to="/home" />
-    },
     {
       path: '/login',
       element: <Login />
     },
     {
-      path: '/home',
-      element: <Home />
-      // children: [
-      //   { path: '', element: <Navigate to="user" /> },
-      //   {
-      //     path: 'user',
-      //     element: <User />
-      //   }
-      // ]
+      path: '/',
+      element: <Home />,
+      children: [
+        { path: '', element: <DataScreening /> },
+        {
+          path: 'config',
+          element: <Config />,
+          children: [
+            {
+              path: 'share',
+              element: <Share />
+            },
+            {
+              path: 'integral',
+              element: <Integral />
+            }
+          ]
+        }
+      ]
+    },
+    {
+      path: '*',
+      element: <NotFind />
     }
   ]);
 }
