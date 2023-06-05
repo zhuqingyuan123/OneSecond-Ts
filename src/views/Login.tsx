@@ -2,12 +2,18 @@
 import React from 'react';
 import logo from '@/Icons/svgs/logo.svg';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import styled from 'styled-components';
 import login from '@/assets/images/login.png';
+import { goVerifycode, goLogin } from '@/service/loginApi';
+import { useRequest } from 'ahooks';
+import { useNavigate } from 'react-router-dom';
 
 const FormField = styled.div`
   margin-top: 40px;
+  .ant-form-item-control-input-content {
+    display: flex;
+  }
   .ant-input-affix-wrapper {
     height: 40px;
   }
@@ -16,16 +22,43 @@ const FormField = styled.div`
   }
 `;
 
-function App() {
+function Login() {
+  const navigate = useNavigate();
+
+  const { data: verifyCodeImg, run: runVerifyCodeImg } = useRequest(goVerifycode);
+  const { run: RunLogin } = useRequest(goLogin, {
+    manual: true,
+    onSuccess: (result) => {
+      if (result.data.code === 200) {
+        message.success(`${result.data.msg}!`);
+        navigate('/');
+      } else {
+        runVerifyCodeImg();
+        message.error(`${result.data.msg}!`);
+      }
+    }
+  });
+
   interface Ilogin {
     adminName: string;
     adminPwd: string;
     no: string;
     verifyCode: string;
   }
-
   const onFinish = (values: Ilogin) => {
-    console.log('Received values of form: ', values);
+    // console.log('Received values of form: ', values);
+    RunLogin({
+      adminName: values.adminName,
+      adminPwd: values.adminPwd,
+      no: verifyCodeImg.no,
+      verifyCode: values.verifyCode
+    });
+    // console.log(userInfo);
+  };
+
+  // 切换验证码
+  const activeIcode = () => {
+    runVerifyCodeImg();
   };
   return (
     <div className="flex items-center justify-center min-h-[100vh]">
@@ -61,19 +94,29 @@ function App() {
                       placeholder="管理员密码"
                     />
                   </Form.Item>
-                  <Form.Item
-                    name="verifyCode"
-                    rules={[{ required: true, message: '请输入验证码!' }]}
-                  >
-                    <Input
-                      prefix={<LockOutlined className="site-form-item-icon" />}
-                      placeholder="输入验证码"
-                      className="verifyCode "
-                    />
-                    <div className="cursor-pointer">
-                      <img src="" alt="" />
-                    </div>
+                  <Form.Item>
+                    <Form.Item
+                      name="verifyCode"
+                      rules={[{ required: true, message: '请输入验证码!' }]}
+                    >
+                      <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        placeholder="输入验证码"
+                        className="verifyCode "
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <div className="cursor-pointer mt-[-10px]" onClick={activeIcode}>
+                        <img
+                          src={`data:image/svg+xml;base64,${btoa(verifyCodeImg?.svg)}`}
+                          alt=""
+                          width="150"
+                          height="50"
+                        />
+                      </div>
+                    </Form.Item>
                   </Form.Item>
+
                   <Form.Item>
                     <Button
                       type="primary"
@@ -99,4 +142,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
