@@ -57,7 +57,8 @@ const contentStyle: React.CSSProperties = {
   top: 80,
   left: 240,
   backgroundColor: '#fff',
-  borderRadius: 4
+  borderRadius: 4,
+  padding: 20
 };
 
 const siderStyle: React.CSSProperties = {
@@ -139,7 +140,7 @@ export default function Index() {
   const navigate = useNavigate();
   const onClick: MenuProps['onClick'] = (e) => {
     if (e.keyPath.length > 1) {
-      console.log('keyPath ', e);
+      // console.log('keyPath ', e);
       navigate(
         e.keyPath
           .reverse()
