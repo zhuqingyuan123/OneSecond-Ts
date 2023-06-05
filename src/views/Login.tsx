@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import React from 'react';
-import loginPng from '@/assets/svgs/loginPng.svg';
+import logo from '@/Icons/svgs/logo.svg';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import styled from 'styled-components';
+import login from '@/assets/images/login.png';
 
 const FormField = styled.div`
   margin-top: 40px;
@@ -30,16 +31,12 @@ function App() {
     <div className="flex items-center justify-center min-h-[100vh]">
       <div className="text-[26px]">
         <div className="flex items-center justify-center">
-          <img src={loginPng} alt="" className="h-[30px] overflow-hidden" />
+          <img src={logo} alt="" className="h-[30px] overflow-hidden" />
           <div className="text-[26px] font-medium ml-[20px]">一秒快送后台管理系统</div>
         </div>
         <div className="login-content flex justify-between mt-[40px] w-[800px] h-[500px] rounded-[8px] items-start">
           <div className="w-[400px] h-[500px] flex items-center justify-center">
-            <img
-              src="http://192.168.121.66:8888/_nuxt/assets/images/login.png"
-              alt=""
-              className="w-[360px]"
-            />
+            <img src={login} alt="" className="w-[360px]" />
           </div>
           <div className="w-[400px] h-[500px] p-[40px]">
             <div>
