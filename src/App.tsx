@@ -18,13 +18,11 @@ const theme = {
 function App() {
   return (
     <ConfigProvider theme={theme}>
-      <div className="w-[100vw] min-w-[1200px] min-h-[100vh]">
-        <StyleProvider hashPriority="high">
-          <BrowserRouter>
-            <RouterConfig />
-          </BrowserRouter>
-        </StyleProvider>
-      </div>
+      <StyleProvider hashPriority="high">
+        <BrowserRouter>
+          <RouterConfig />
+        </BrowserRouter>
+      </StyleProvider>
     </ConfigProvider>
   );
 }

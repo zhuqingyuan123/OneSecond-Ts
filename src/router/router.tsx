@@ -7,7 +7,7 @@ export default function RouterConfig() {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to="/login" />
+      element: <Navigate to="/home" />
     },
     {
       path: '/login',
@@ -16,6 +16,13 @@ export default function RouterConfig() {
     {
       path: '/home',
       element: <Home />
+      // children: [
+      //   { path: '', element: <Navigate to="user" /> },
+      //   {
+      //     path: 'user',
+      //     element: <User />
+      //   }
+      // ]
     }
   ]);
 }
