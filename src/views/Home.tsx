@@ -51,7 +51,7 @@ const headerStyle: React.CSSProperties = {
 
 const contentStyle: React.CSSProperties = {
   width: 'calc(100vw - 40px - 20px - 200px)',
-  minWidth: 'min-width: calc(1200px - 40px - 20px - 200px)',
+  minWidth: 'calc(1200px - 40px - 20px - 200px)',
   height: 'calc(100vh - 60px - 40px)',
   position: 'absolute',
   top: 80,
