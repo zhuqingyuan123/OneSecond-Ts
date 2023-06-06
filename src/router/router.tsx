@@ -7,6 +7,10 @@ import Share from '@/views/Config/Share';
 import Integral from '@/views/Config/Integral';
 import NotFind from '@/views/NotFind';
 import DataScreening from '@/views/DataScreening';
+import User from '@/views/User/user'
+import Agent from '@/views/User/Agent/agents'
+import Admin from '@/views/User/admins'
+import Users from '@/views/User/users'
 
 export default function RouterConfig() {
   return useRoutes([
@@ -30,6 +34,24 @@ export default function RouterConfig() {
             {
               path: 'integral',
               element: <Integral />
+            }
+          ]
+        },
+        {
+          path: 'user',
+          element: <User />,
+          children: [
+            {
+              path: 'agents',
+              element: <Agent />
+            },
+            {
+              path: 'admins',
+              element: <Admin />
+            },
+            {
+              path: 'users',
+              element: <Users />
             }
           ]
         }
