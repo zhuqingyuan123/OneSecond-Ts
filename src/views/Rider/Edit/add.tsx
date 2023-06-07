@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import { ArrowLeftOutlined, PictureOutlined } from '@ant-design/icons';
@@ -6,6 +7,12 @@ import type { RadioChangeEvent } from 'antd';
 import styled from 'styled-components';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
+import { createHashHistory } from 'history';
+
+const history = createHashHistory({ window });
+const backHandle = () => {
+  history.go(-1);
+};
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -88,7 +95,7 @@ function Add() {
     <Wraper>
       <div>
         <h1 className=" text-xl">
-          <ArrowLeftOutlined className=" mr-2" />
+          <ArrowLeftOutlined className=" mr-2" onClick={() => backHandle()} />
           新手骑手
         </h1>
         <div className=" border-t border-white border-solid mt-3">

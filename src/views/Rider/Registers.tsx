@@ -113,7 +113,7 @@ function Registers() {
   return (
     <Wraper>
       <div>
-        <h1 className=" text-2xl">骑手列表</h1>
+        <h1 className=" text-2xl">骑手审核列表</h1>
         <div className="border-b border-neutral-300 border-solid">
           <div>
             <Input placeholder="用户编号" className="inputs" />
