@@ -7,10 +7,15 @@ import Share from '@/views/Config/Share';
 import Integral from '@/views/Config/Integral';
 import NotFind from '@/views/NotFind';
 import DataScreening from '@/views/DataScreening';
-import User from '@/views/User/user'
-import Agent from '@/views/User/Agent/agents'
-import Admin from '@/views/User/admins'
-import Users from '@/views/User/users'
+import User from '@/views/User/user';
+import Agent from '@/views/User/Agent/agents';
+import Admin from '@/views/User/admins';
+import Users from '@/views/User/users';
+import Rider from '@/views/Rider/Rider';
+import Riders from '@/views/Rider/Riders';
+import Registers from '@/views/Rider/Registers';
+import Edit from '@/views/Rider/Edit/Edit';
+import Add from '@/views/Rider/Edit/add';
 
 export default function RouterConfig() {
   return useRoutes([
@@ -52,6 +57,30 @@ export default function RouterConfig() {
             {
               path: 'users',
               element: <Users />
+            }
+          ]
+        },
+        {
+          path: 'rider',
+          element: <Rider />,
+          children: [
+            {
+              path: 'riders',
+              element: <Riders />
+            },
+            {
+              path: 'registers',
+              element: <Registers />
+            },
+            {
+              path: 'edit',
+              element: <Edit />,
+              children: [
+                {
+                  path: 'add',
+                  element: <Add />
+                }
+              ]
             }
           ]
         }
