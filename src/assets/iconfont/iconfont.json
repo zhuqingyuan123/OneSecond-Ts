@@ -1,0 +1,37 @@
+{
+  "id": "4108394",
+  "name": "React",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "23025869",
+      "name": "钱袋",
+      "font_class": "yangshi_icon_tongyong_money_bag",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "33390135",
+      "name": "头像_avatar",
+      "font_class": "touxiang_avatar",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "16092357",
+      "name": "icons8-task_completed 1",
+      "font_class": "icons8-task_completed1",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "24342126",
+      "name": "purse-fill",
+      "font_class": "purse-fill",
+      "unicode": "ea05",
+      "unicode_decimal": 59909
+    }
+  ]
+}
