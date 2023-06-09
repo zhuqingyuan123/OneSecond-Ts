@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'iconfont'; /* Project id 4108394 */
+  src: url('iconfont.woff2?t=1686106081282') format('woff2'),
+    url('iconfont.woff?t=1686106081282') format('woff'),
+    url('iconfont.ttf?t=1686106081282') format('truetype');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 24px;
+  font-style: normal;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yangshi_icon_tongyong_money_bag:before {
+  content: '\e672';
+}
+
+.icon-touxiang_avatar:before {
+  content: '\e622';
+}
+
+.icon-icons8-task_completed1:before {
+  content: '\e61c';
+}
+
+.icon-purse-fill:before {
+  content: '\ea05';
+}
